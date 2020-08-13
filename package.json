@@ -1,0 +1,20 @@
+{
+  "name": "async-catch-loader",
+  "version": "1.0.0",
+  "main": "src/index.js",
+  "license": "MIT",
+  "scripts": {
+    "test": "jest --detectOpenHandles"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.11.1",
+    "@babel/parser": "^7.11.2",
+    "@babel/preset-env": "^7.11.0",
+    "@babel/traverse": "^7.11.0",
+    "@babel/types": "^7.11.0",
+    "babel-jest": "^26.2.2",
+    "jest": "^26.2.2",
+    "memory-fs": "^0.5.0",
+    "webpack": "^5.0.0-beta.24"
+  }
+}
