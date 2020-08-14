@@ -33,12 +33,11 @@ module.exports = function (source) {
     CallExpression (path) {
       const { node, parentPath } = path
       const callee = node.callee
-      // !t.isMemberExpression(parentPath.node)这一层判断是替换父节点之后，p.then()表达式再次进入
+      // !t.isMemberExpression(parentPath.node)这一层判断是替换父节点之后，防止p.then()表达式再次进入
       if (!t.isMemberExpression(parentPath.node) && t.isMemberExpression(callee) && t.isIdentifier(callee.property) && t.isIdentifier(callee.object)) {
         const isThenIdentifier = callee.property.name === 'then'
         const isPromise = promises.includes(callee.object.name)
         if (isThenIdentifier && isPromise) { // 说明是一个promise调用then表达式
-          if (node.property && node.property.name === 'catch') return // 如果已经有catch语法了则不需要处理了
           const params = t.arrowFunctionExpression([t.identifier(options.identifier)], t.blockStatement(catchNode))
           const expressionStatement = t.expressionStatement(
             t.callExpression(
